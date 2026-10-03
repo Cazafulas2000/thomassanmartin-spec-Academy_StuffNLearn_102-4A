@@ -1,0 +1,33 @@
+{% extends 'cursos/base.html' %}
+
+{% block titulo %}Inicio - Academia Online{% endblock %}
+
+{% block contenido %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+    <h1 class="display-5 fw-bold">Bienvenido a la Academia Online</h1>
+    <p class="fs-5">Administra los cursos que ofrece la academia: revisa el listado, agrega nuevos cursos y mantén la información al día.</p>
+    <p>Actualmente hay <strong>{{ total }}</strong> curso{{ total|pluralize }} registrado{{ total|pluralize }}.</p>
+    <a href="{% url 'lista_cursos' %}" class="btn btn-primary">Ver cursos</a>
+    <a href="{% url 'crear_curso' %}" class="btn btn-outline-primary">Agregar curso</a>
+</div>
+
+<h4 class="mb-3">Últimos cursos agregados</h4>
+<div class="row">
+    {% for curso in ultimos %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <span class="badge bg-info text-dark mb-2">{{ curso.get_categoria_display }}</span>
+                    <h5 class="card-title">{{ curso.nombre }}</h5>
+                    <p class="card-text">{{ curso.descripcion|truncatechars:90 }}</p>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-muted">{{ curso.instructor }} - {{ curso.duracion_horas }} horas</small>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">Todavía no hay cursos registrados.</p>
+    {% endfor %}
+</div>
+{% endblock %}
