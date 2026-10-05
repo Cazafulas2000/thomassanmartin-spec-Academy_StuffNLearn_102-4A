@@ -23,6 +23,7 @@
                         <th>Horas</th>
                         <th>Precio</th>
                         <th>Año</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,13 @@
                         <td>{{ curso.duracion_horas }}</td>
                         <td>${{ curso.precio }}</td>
                         <td>{{ curso.anio }}</td>
+                        <td>
+                            <a href="{% url 'editar_curso' curso.id %}" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="{% url 'eliminar_curso' curso.id %}" class="btn btn-sm btn-danger"
+                            onclick="return confirm('¿Estás seguro de eliminar este curso?');">
+                            Eliminar
+                        </a>
+                    </td>
                     </tr>
                     {% endfor %}
                 </tbody>
