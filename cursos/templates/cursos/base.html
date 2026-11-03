@@ -26,10 +26,19 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'lista_cursos' %}">Cursos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'crear_curso' %}">Nuevo curso</a></li>
+                    <li class="nav-item ms-lg-3"><span class="navbar-text me-2">Hola, {{ user.username }}</span></li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-light">Cerrar sesión</button>
+                        </form>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
